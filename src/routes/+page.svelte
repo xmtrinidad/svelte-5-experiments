@@ -1,2 +1,19 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import '$lib/components/childA.svelte';
+
+	let str = '';
+
+	function addWut() {
+		str += 'wut';
+	}
+
+	function addMeme() {
+		str += 'meme';
+	}
+</script>
+
+<main>
+	<h1>Thing</h1>
+	<my-meme onwut={addWut} onmeme={addMeme}></my-meme>
+	<p>{str}</p>
+</main>
