@@ -1,15 +1,13 @@
 <script lang="ts">
-    let { 
-        updateColor,
-        updateName 
-    }: {
-        updateColor: (color: string) => void;
-        updateName: (name: string) => void;
-    } = $props();
+  interface Props {
+    updateColor: (color: string) => void;
+    updateName: (name: string) => void;
+  }
 
+  let { updateColor, updateName }: Props = $props();
 
-    let color = $state('');
-    let name = $state('');
+  let color = $state('');
+  let name = $state('');
 </script>
 
 <div class="settings">
