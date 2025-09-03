@@ -1,9 +1,21 @@
+import { getBlueprintsDbConnection } from '$lib/server/db/connections';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit'; 
 
-export const GET: RequestHandler = ({ request }) => {
-	// log all headers
-	console.log(...request.headers);
+export const GET: RequestHandler = async ({ request }) => {
+
+	let pool;
+
+	try {
+		pool = await getBlueprintsDbConnection();
+
+		const blueprintQuery = await pool.request().query('SELECT * FROM blueprint');
+
+		console.log(blueprintQuery);
+	} catch (err) {
+		console.log('Error establishing database connection:', err);
+		return json({ error: 'Database connection failed' }, { status: 500 });
+	}
 
 	// create a JSON Response using a header we received
 	return json({
